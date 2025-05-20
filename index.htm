@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Pedido Fofo</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background-color: #fff0f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Segoe UI', sans-serif;
+      overflow: hidden;
+    }
+
+    .container {
+      text-align: center;
+      position: relative;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 40px;
+      color: #d63384;
+    }
+
+    #botoes {
+      position: relative;
+      height: 60px; /* reserva espaço inicial */
+    }
+
+    button {
+      padding: 15px 30px;
+      font-size: 20px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: fixed;
+    }
+
+    #botao-sim {
+      background-color: #28a745;
+      color: white;
+      z-index: 2;
+    }
+
+    #botao-nao {
+      background-color: #dc3545;
+      color: white;
+      z-index: 2;
+    }
+
+    #mensagem {
+      margin-top: 30px;
+      font-size: 1.8rem;
+      color: #ff69b4;
+      animation: fadeIn 1s ease forwards;
+      opacity: 0;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+        transform: scale(1.05);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Namora comigo?</h1>
+    <div id="botoes">
+      <button id="botao-sim">sim</button>
+      <button id="botao-nao">não</button>
+    </div>
+    <div id="mensagem"></div>
+  </div>
+
+  <script>
+    const botaoSim = document.getElementById('botao-sim');
+    const botaoNao = document.getElementById('botao-nao');
+    const mensagem = document.getElementById('mensagem');
+
+    function moverBotao(botao) {
+      const larguraJanela = window.innerWidth;
+      const alturaJanela = window.innerHeight;
+      const larguraBotao = botao.offsetWidth;
+      const alturaBotao = botao.offsetHeight;
+
+      const maxLeft = larguraJanela - larguraBotao - 10;
+      const maxTop = alturaJanela - alturaBotao - 10;
+
+      const novaEsquerda = Math.random() * maxLeft;
+      const novoTopo = Math.random() * maxTop;
+
+      botao.style.left = novaEsquerda + 'px';
+      botao.style.top = novoTopo + 'px';
+    }
+
+    botaoSim.addEventListener('click', () => {
+      moverBotao(botaoSim);
+      mensagem.innerHTML = "Mentirosa pkrl em";
+      mensagem.style.opacity = '1';
+    });
+
+    botaoNao.addEventListener('click', () => {
+      moverBotao(botaoNao);
+    });
+
+    // Define posições iniciais centralizadas
+    window.onload = () => {
+      const larguraJanela = window.innerWidth;
+      const alturaJanela = window.innerHeight;
+
+      const larguraSim = botaoSim.offsetWidth;
+      const larguraNao = botaoNao.offsetWidth;
+
+      const centroX = larguraJanela / 2;
+      const topoInicial = alturaJanela / 2 + 40;
+
+      botaoSim.style.left = (centroX - larguraSim - 10) + 'px';
+      botaoSim.style.top = topoInicial + 'px';
+
+      botaoNao.style.left = (centroX + 10) + 'px';
+      botaoNao.style.top = topoInicial + 'px';
+    };
+  </script>
+
+</body>
+</html>
